@@ -1,0 +1,5 @@
+streamlit
+plotly
+prophet
+yfinance
+datetime
