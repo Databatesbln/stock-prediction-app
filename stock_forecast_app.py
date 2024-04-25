@@ -34,11 +34,11 @@ data_load_state = st.text("Load data...")
 data = load_data(selected_stocks)
 data_load_state.text("Loading data...done!")
 
-#analyze and plot last 5 days of stock data
-
+#display subheader 'data" and display the last few rows
 st.subheader('Data')
 st.write(data.tail())
 
+# Define a function to plot raw data of stock prices
 def plot_raw_data(): 
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data['Date'], y=data['Open'], name='stock_open'))
@@ -46,24 +46,31 @@ def plot_raw_data():
     fig.layout.update(title_text="Time Series Data", xaxis_rangeslider_visible =True)
     st.plotly_chart(fig)
 
+# Call the function to plot the data
 plot_raw_data()
 
-#Forecasting - change
+# Prepare the data for forecasting by selecting and renaming columns
 df_train = data[['Date', 'Close']]
 df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
+# Initialize the Prophet model, fit it with training data and create future dates for predictions
 m = Prophet()
 m.fit(df_train)
 future = m.make_future_dataframe(periods = period)
+
+# Use the model to make predictions for the specified future dates
 forecast = m.predict(future)
 
+# Display the subheader 'Forecast Data' in the app and display the last few rows of forecast
 st.subheader('Forecast Data')
 st.write(forecast.tail())
 
+#Display title "Forecast", plot forecast and show
 st.write('Forecast')
 fig1 = plot_plotly(m, forecast)
 st.plotly_chart(fig1)
 
+#Plot Forecast Components
 st.write('Forecast Components')
 fig2 = m.plot_components(forecast)
 st.write(fig2)
