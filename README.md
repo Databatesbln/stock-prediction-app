@@ -21,7 +21,7 @@ Prophet: Handles time-series forecasting.
 Plotly: Generates interactive graphs.
 
 # Accessing App
-App is hosted on streamlit cloud and can be accessed here: https://stock-prediction-app-bbx7zo6m3g7rfb4hrwq5vq.streamlit.app/
+App is hosted on streamlit cloud and can be accessed here: https://stock-prediction-app-mmxha6bqlsfmmce5xbe6km.streamlit.app/
 
 # Usage
 Select a Stock: Use the dropdown menu to choose a stock.
